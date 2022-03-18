@@ -61,7 +61,7 @@ pacinstall('ntpd')
 
 run("hwclock --systohc",shell=True)
 
-systemctl(ntpd)
+systemctl('ntpd')
 
 #Network
 hostname_var=input("Hostname: ")
