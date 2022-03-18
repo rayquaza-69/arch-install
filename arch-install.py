@@ -129,7 +129,7 @@ shutil.copyfile("./CONFIGS/sudoers",'/etc/sudoers')
 
 #Fish
 pacinstall("fish")
-run("chsh -s /usr/bin/fish",shell=True)
+run("chsh -s /usr/bin/fish "+user,shell=True)
 
 #Paru
 os.mkdir("git")
