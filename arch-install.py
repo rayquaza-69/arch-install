@@ -92,7 +92,7 @@ with open("/etc/locale.gen",'w') as f:
     for i in locale_gen:
         f.write(i)
 
-run("local-gen")
+run("local-gen",shell=True)
 
 with open("/etc/locale.conf",'w') as f:
     f.write("LANG=en_US.UTF-8")
