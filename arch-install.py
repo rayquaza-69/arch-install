@@ -152,6 +152,7 @@ print()
 print("Copying sudo config file")
 print()
 shutil.copyfile("./CONFIGS/sudoers",'/etc/sudoers')
+pacinstall('sudo')
 print("Sudo configured")
 
 
