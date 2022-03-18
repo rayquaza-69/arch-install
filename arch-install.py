@@ -111,13 +111,15 @@ else:
 
 run("grub-mkconfig -o /boot/grub/grub.cfg",shell=True)
 
-#User
-user = input("Username: ")
-run("useradd -mG wheel,audio,video,optical,tty,network,storage "+user,shell=True)
+
 
 #Passwords
 print("Set root password")
 run("passwd",shell=True)
+
+#User
+user = input("Username: ")
+run("useradd -mG wheel,audio,video,optical,tty,network,storage "+user,shell=True)
 
 print("Set user password")
 run("passwd "+user,shell=True)
