@@ -89,7 +89,7 @@ for i in range(len(locale_gen)):
     if locale_gen[i].strip()=="#en_US.UTF-8 UTF-8":
         locale_gen[i]="en_US.UTF-8 UTF-8\n"
 with open("/etc/locale.gen",'w') as f:
-    for i locale_gen:
+    for i in locale_gen:
         f.write(i)
 
 run("local-gen")
