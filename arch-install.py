@@ -33,9 +33,11 @@ def systemctl(a):
 #print(p1.stdout)
 
 #Pacman config
-
+print("Copying pacman config file")
+print("")
 shutil.copyfile("./CONFIGS/pacman.conf","/etc/pacman.conf")
-
+print("Pacman configured.")
+print()
 
 #Checking for UEFI
 
@@ -44,17 +46,22 @@ if os.path.exists("/sys/firmware/efi/efivars"):
     UEFI_var=True
 
 #Checking for internet connection
+print("Checking for an internet connection")
+print()
 
 p1 = run(["ping", "google.com" ,"-c" ,"1"],capture_output=True,text=True)
 if p1.stdout!='':
     print("You have an internet connection.")
+    print()
 else:
     print("You do not have an internet connection.")
+    print()
     exit()
 
 #Time
 
-print("Configuring time.")
+print("Configuring time")
+print()
 run("ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime",shell=True)
 
 pacinstall('ntp')
@@ -62,8 +69,12 @@ pacinstall('ntp')
 run("hwclock --systohc",shell=True)
 
 systemctl('ntpd')
+print("Time configured")
+print()
 
 #Network
+print("Configuring Network")
+print()
 hostname_var=input("Hostname: ")
 with open("/etc/hostname",'w') as f:
     f.write(hostname_var)
@@ -80,9 +91,11 @@ if UEFI_var==True:
 
 pacinstall_multi(base_packages)
 systemctl("NetworkManager.service")
-
+print("Network Configured")
+print()
 #Locales
-
+print("Configuring Locales")
+print()
 with open("/etc/locale.gen") as f:
     locale_gen=f.readlines()
 for i in range(len(locale_gen)):
@@ -96,10 +109,13 @@ run("locale-gen",shell=True)
 
 with open("/etc/locale.conf",'w') as f:
     f.write("LANG=en_US.UTF-8")
-
+print("Locales configured")
+print()
 
 
 #GRUB
+print("Installing GRUB")
+print()
 
 if UEFI_var==True:
     grub_dir=input("Grub install directory: ")
@@ -110,33 +126,51 @@ else:
     run("grub-install --target=i386-pc "+grub_dir,shell=True)
 
 run("grub-mkconfig -o /boot/grub/grub.cfg",shell=True)
-
+print("GRUB installed")
+print()
 
 
 #Passwords
+print("Accounts and Passwords")
+print()
 print("Set root password")
 run("passwd",shell=True)
-
+print()
 #User
+
 user = input("Username: ")
 run("useradd -mG wheel,audio,video,optical,tty,network,storage "+user,shell=True)
 
+print()
 print("Set user password")
 run("passwd "+user,shell=True)
 
+print("Accounts configured")
+print()
 #Sudo
+
+print("Copying sudo config file")
+print()
 shutil.copyfile("./CONFIGS/sudoers",'/etc/sudoers')
+print("Sudo configured")
+
 
 #Fish
+print("Installing fish shell")
+print()
 pacinstall("fish")
 run("chsh -s /usr/bin/fish "+user,shell=True)
+print("Configured fish shell")
+
 
 #Paru
+print("AUR helper(paru)")
+print()
 os.mkdir("git")
 os.mkdir("git/paru-bin")
 run("git clone https://aur.archlinux.org/paru-bin.git ./git/paru-bin/",shell=True)
 run("cd ./git/paru-bin && makepkg -sri --noconfirm",shell=True)
-
+print()
 
 
 
