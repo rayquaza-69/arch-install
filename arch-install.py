@@ -103,7 +103,7 @@ with open("/etc/locale.conf",'w') as f:
 
 if UEFI_var==True:
     grub_dir=input("Grub install directory: ")
-    run("grub-install --target=x86_64-efi --efi-directory="+grub_dir+ "--bootloader-id=GRUB",shell=True)
+    run("grub-install --target=x86_64-efi --efi-directory="+grub_dir+" --bootloader-id=GRUB",shell=True)
 
 else:
     grub_dir=input("Grub install disk: ")
