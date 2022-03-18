@@ -57,7 +57,7 @@ else:
 print("Configuring time.")
 run("ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime",shell=True)
 
-pacinstall(ntpd)
+pacinstall('ntpd')
 
 run("hwclock --systohc",shell=True)
 
