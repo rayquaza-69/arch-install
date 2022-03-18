@@ -109,6 +109,7 @@ else:
     grub_dir=input("Grub install disk: ")
     run("grub-install --target=i386-pc "+grub_dir,shell=True)
 
+run("grub-mkconfig -o /boot/grub/grub.cfg",shell=True)
 
 #User
 user = input("Username: ")
