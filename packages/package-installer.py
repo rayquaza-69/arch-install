@@ -12,6 +12,6 @@ with open('packages.txt') as f:
 for i in range(len(packages)):
     packages[i]=packages[i].strip()
 
-for i in range(0,len(packages),2):
-    s=packages[i:i+2]
+for i in range(0,len(packages),5):
+    s=packages[i:i+5]
     paruin(s)
